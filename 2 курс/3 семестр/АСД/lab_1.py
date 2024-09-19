@@ -1,30 +1,22 @@
-x = str(input('Введите строку'))
+def check_all_brackets(s: str) -> bool:
 
-x = x.replace('(', '1')
-x = x.replace('[', '2')
-x = x.replace('{', '3')
-x = x.replace(')', '4')
-x = x.replace(']', '5')
-x = x.replace('}', '6')
-
-def fun(a, b):
-
-    if len(a) == 2 and (int(a[1]) - int(a[0])) == 3: return "Строка существует"
+    stack = []
+    bracket_map = {')': '(', '}': '{', ']': '['}
     
-    try:
+    for char in s:
 
-        if a[b] in '123': return fun(a, b+1)
+        if char in bracket_map.values(): stack.append(char) # если это открывающая скобка 
 
-        elif int(a[b])-int(a[b-1]) == 3:
+        elif char in bracket_map:  # если это закрывающая скобка
 
-            a = a[0:b-1] + a[b+1:len(a)]
+            if not stack or stack[-1] != bracket_map[char]: return False
 
-            return fun(a, b-1)
-        
-        else: return "Строки не существует"
+            stack.pop()
 
-    except(ValueError):
+        else: continue
 
-        return "Строки не существует"
-    
-print(fun(x,0))
+    return len(stack) == 0
+
+a = str(input('Введите строку: '))
+
+print('Строка существует' if check_all_brackets(a) else 'Строка не существует')
