@@ -42,9 +42,13 @@ class HashTable:
 
         return None
     
-    def display(self):
+    def __str__(self):
 
-        for i, entry in enumerate(self.table): print(f'Index {i}: {entry}')
+        result = ''
+
+        for i, entry in enumerate(self.table): result += f'Index {i}: {entry}\n'
+        
+        return result
 
 file_path = "input.txt"
 
