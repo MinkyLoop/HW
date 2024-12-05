@@ -68,4 +68,7 @@ for word in words:
         count = hash_table.get(word)
         hash_table.linear_probing(word, count + 1)
 
-hash_table.display()
+with open('output.txt', "w", encoding="utf-8") as file:
+    for i, entry in enumerate(hash_table.table):
+        if entry is not None:
+            file.write(f'Index {i}: {entry}\n')
